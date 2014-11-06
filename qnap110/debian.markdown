@@ -60,3 +60,64 @@
     cat initrd.gz > /dev/mtdblock2
     
   debian installer will start  
+
+
+##### after installation
+
+    #  install midnight commander
+    sudo apt-get install mc 
+    
+    # install git
+    sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev
+    
+    cd /tmp
+    wget http://[git_version].tar.gz
+    tar -zxf [git_version].tar.gz
+    cd [git_version]
+    make prefix=/usr/local all
+    sudo make prefix=/usr/local install
+    
+    # install node.js
+    sudo apt-get install build-essential python libssl-dev
+    
+    cd /tmp
+    wget http://[node_version].tar.gz
+    tar -xvf [node_version].tar.gz
+    cd [node_version]
+    
+    create build.sh file
+    #!/bin/sh
+    export CFLAGS='-march=armv5t'
+    export CXXFLAGS='-march=armv5t'
+    ./configure
+    make install
+    
+    chmod +x build.sh
+    sudo ./build.sh
+    
+    # install rbenv
+    git clone git://github.com/sstephenson/rbenv.git .rbenv
+    
+    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+    echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+    
+    git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+    
+    echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+    
+    # install bower
+    sudo npm install -g bower
+    
+    # install sqlite3
+    sudo apt-get install libsqlite3-dev
+    sudo apt-get install sqlite3 # without it rails dbconsole will not work
+    
+    # install ruby
+    rbenv install [ruby_version]
+    rbenv global [ruby_version]
+    
+    # install gem bundler
+    gem install bundler
+    
+    
+
